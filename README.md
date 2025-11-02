@@ -16,22 +16,35 @@ lab8/
 │   ├── models/
 
 │   └── routes/
+
 ├── database/          # Database initialization scripts
+
 ├── frontend/          # HTML/CSS/JS frontend
+
 │   ├── index.html
+
 │   ├── login.html
+
 │   ├── student.html
+
 │   ├── teacher.html
+
 │   └── src/
+
 │       ├── css/
+
 │       └── js/
+
 ├── README.md
+
 └── requirements.txt
 
 Admin Page
+
 http://127.0.0.1:5000/admin
 
 Setup and Run
+
 1. Create virtual environment and install dependencies
 python3 -m venv .venv
 source .venv/bin/activate        # macOS/Linux
@@ -40,15 +53,18 @@ source .venv/bin/activate        # macOS/Linux
 pip install -r requirements.txt
 
 2. Initialize database
+   
 python database/seed.py
 
 3. Start Flask backend
+   
 python backend/app.py
 
 Server runs at:
 http://127.0.0.1:5000
 
 4. Start frontend
+   
 cd frontend
 python3 -m http.server 5500
 
