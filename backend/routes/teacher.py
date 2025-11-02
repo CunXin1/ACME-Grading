@@ -6,7 +6,7 @@ from backend.models.enrollment import Enrollment
 
 teacher_bp = Blueprint("teacher", __name__)
 
-# 查看自己教的课程
+# 查看自己教的课程.  
 @teacher_bp.route("/classes/<int:teacher_id>", methods=["GET"])
 def get_teacher_classes(teacher_id):
     classes = Course.query.filter_by(teacher_id=teacher_id).all()
