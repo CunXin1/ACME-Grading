@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+*.pid
+*.out
+*.tmp
+*.bak
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Database
+*.db
+*.sqlite3
+instance/
+database/app.db
+database/__pycache__/
+
+# Flask cache and sessions
+flask_session/
+*.swp
+*.sublime-workspace
+
+# Frontend build/cache
+node_modules/
+dist/
+build/
+.npm/
+package-lock.json
+
+# IDE and editor files
+.vscode/
+.idea/
+*.iml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python packaging
+*.egg-info/
+__pycache__/
+.pytest_cache/
+.cache/

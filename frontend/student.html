@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACME University - Student</title>
+  <link rel="stylesheet" href="/src/css/base.css">
+<link rel="stylesheet" href="/src/css/student.css">
+
+</head>
+<body>
+  <div class="student-container">
+    <header>
+      <h1>ACME University</h1>
+      <div class="user-bar">
+        <span id="welcome"></span>
+        <a href="#" id="logout">Sign out</a>
+      </div>
+    </header>
+
+    <div class="tabs">
+        <div class="tabs-inner">
+            <button id="myCoursesTab" class="active">Your Courses</button>
+            <button id="allCoursesTab">Add Courses</button>
+        </div>
+    </div>
+
+    <div id="coursesTable">
+      <table id="table">
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Teacher</th>
+            <th>Time</th>
+            <th>Students Enrolled</th>
+            <th id="actionHeader"></th>
+          </tr>
+        </thead>
+        <tbody id="courseRows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="../src/js/student.js"></script>
+</body>
+</html>

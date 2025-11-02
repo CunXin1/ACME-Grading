@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACME University - Teacher</title>
+  <link rel="stylesheet" href="/src/css/base.css">
+<link rel="stylesheet" href="/src/css/teacher.css">
+
+</head>
+<body>
+  <div class="teacher-container">
+    <header>
+      <h1>ACME University</h1>
+      <div class="user-bar">
+        <span id="welcome"></span>
+        <a href="#" id="logout">Sign out</a>
+      </div>
+    </header>
+
+    <!-- 主界面：课程列表 -->
+    <div id="classListView">
+      <h2>Your Courses</h2>
+      <table id="classesTable">
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Teacher</th>
+            <th>Time</th>
+            <th>Students Enrolled</th>
+          </tr>
+        </thead>
+        <tbody id="classRows"></tbody>
+      </table>
+    </div>
+
+    <!-- 详情界面：学生成绩 -->
+    <div id="studentsView" style="display:none;">
+      <div class="top-bar">
+        <button id="backBtn" class="back-btn">← Back</button>
+        <h2 id="courseTitle"></h2>
+      </div>
+
+      <table id="studentsTable">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody id="studentRows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="../src/js/teacher.js"></script>
+</body>
+</html>

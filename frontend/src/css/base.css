@@ -1,0 +1,32 @@
+/* frontend/src/css/base.css */
+
+body {
+  background-color: #dce4f7;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  background-color: #4267b2;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #34569a;
+}
+
+.error {
+  color: red;
+  margin-top: 8px;
+}

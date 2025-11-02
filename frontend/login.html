@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACME University - Login</title>
+  <link rel="stylesheet" href="/src/css/base.css">
+  <link rel="stylesheet" href="/src/css/login.css">
+
+</head>
+<body>
+  <div class="login-container">
+    <h1>ACME University</h1>
+    <form id="loginForm">
+      <label for="email">Username</label>
+      <input type="text" id="email" placeholder="Enter your email or username" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+
+      <button type="submit">Sign in</button>
+      <p id="error" class="error"></p>
+    </form>
+    <p>
+  Don't have an account? 
+  <a href="#" id="showRegister">Register here</a>
+</p>
+
+<!-- 注册表单（默认隐藏） -->
+<div id="registerBox" style="display:none;">
+  <h2>Create Account</h2>
+  <label for="regName">Name</label>
+  <input type="text" id="regName" required>
+
+  <label for="regEmail">Email</label>
+  <input type="email" id="regEmail" required>
+
+  <label for="regPassword">Password</label>
+  <input type="password" id="regPassword" required>
+
+  <label for="regRole">Role</label>
+  <select id="regRole">
+    <option value="student">Student</option>
+    <option value="teacher">Teacher</option>
+  </select>
+
+  <button id="registerBtn">Register</button>
+  <p id="regMsg" class="error"></p>
+</div>
+
+  </div>
+
+  <script src="../src/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+flask
+flask_sqlalchemy
+flask_login
+flask_admin
+flask_cors
+werkzeug
