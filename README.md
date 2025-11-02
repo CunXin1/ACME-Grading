@@ -8,7 +8,7 @@ The system uses SQLite for data storage and Flask-Login for authentication
 lab8/
 ├── backend/           # Flask backend
 │   ├── app.py
-│   ├── __init__.py
+│   ├── init.py
 │   ├── models/
 │   └── routes/
 ├── database/          # Database initialization scripts
@@ -30,7 +30,7 @@ Setup and Run
 1. Create virtual environment and install dependencies
 python3 -m venv .venv
 source .venv/bin/activate        # macOS/Linux
-# .venv\Scripts\activate         # Windows
+ .venv\Scripts\activate         # Windows
 
 pip install -r requirements.txt
 
