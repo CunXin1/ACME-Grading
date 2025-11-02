@@ -6,10 +6,15 @@ The system uses SQLite for data storage and Flask-Login for authentication
 
 
 lab8/
+
 ├── backend/           # Flask backend
+
 │   ├── app.py
+
 │   ├── init.py
+
 │   ├── models/
+
 │   └── routes/
 ├── database/          # Database initialization scripts
 ├── frontend/          # HTML/CSS/JS frontend
