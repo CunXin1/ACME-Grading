@@ -37,7 +37,7 @@ with app.app_context():
         """
         return generate_password_hash(name.replace(" ", "").lower(),
                                       method="pbkdf2:sha256")
-
+       
 
     # -------- Teacher User Records --------
     teachers = [
@@ -65,6 +65,14 @@ with app.app_context():
 
     db.session.add_all(teachers + students)
     db.session.commit()
+
+    admin = User(
+    name="Admin",
+    role="admin",
+    email="admin@school.edu",
+    password="adminpassword"  # In a real system, hash this password as well.
+    )
+    db.session.add(admin)
 
 
     # -------- Course Records --------

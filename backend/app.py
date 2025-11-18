@@ -2,6 +2,10 @@
 import os, sys
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
+from flask_login import current_user
+from flask_admin import Admin, AdminIndexView
+from flask_admin.contrib.sqla import ModelView
+
 
 # Import the application factory and database instance
 # from the backend package. These are defined in backend/__init__.py.
@@ -44,6 +48,21 @@ class EnrollmentAdmin(ModelView):
         "course_name": _course_name,
     }
 
+class CourseAdmin(ModelView):
+    # Columns to display in list view
+    column_list = ("teacher_name", "name", "time", "capacity")
+
+    # Disable teacher_id from being displayed
+    column_exclude_list = ("teacher_id",)
+
+    # Format teacher_name column
+    def _teacher_name(view, context, model, name):
+        return model.teacher.name if model.teacher else "None"
+
+    column_formatters = {
+        "teacher_name": _teacher_name
+    }
+
 
 # Create the Flask application using the factory pattern.
 # This ensures all configuration, database bindings, and blueprints
@@ -56,8 +75,7 @@ admin = Admin(app, name="Grade System Admin")
 
 # Register basic model views. These use default behavior.
 admin.add_view(ModelView(User, db.session))
-admin.add_view(ModelView(Course, db.session))
-
+admin.add_view(CourseAdmin(Course, db.session))
 # Register the custom Enrollment admin view defined above.
 admin.add_view(EnrollmentAdmin(Enrollment, db.session))
 

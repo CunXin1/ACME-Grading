@@ -27,6 +27,10 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200))
     # Hashed password for authentication.
 
+    def __repr__(self):
+        return f"{self.name}"
+        # Helpful string output for debugging and logging.
+
 
 @login_manager.user_loader
 def load_user(user_id):

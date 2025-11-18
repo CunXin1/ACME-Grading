@@ -22,5 +22,8 @@ class Course(db.Model):
     capacity = db.Column(db.Integer)  
     # Maximum number of students allowed to enroll.
 
-    teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'))  
+    teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  
     # Foreign key linking this course to the teacher (User model).
+
+    # ORM relationship to the User model representing the teacher.
+    teacher = db.relationship("User")
