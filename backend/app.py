@@ -64,14 +64,27 @@ class CourseAdmin(ModelView):
     }
 
 
+class MyAdminIndexView(AdminIndexView):
+    """
+    Custom Admin Index View that hides the Home menu item
+    """
+    def is_visible(self):
+        # Return False to hide the Home link from the navigation menu
+        return False
+
+
 # Create the Flask application using the factory pattern.
 # This ensures all configuration, database bindings, and blueprints
 # are initialized in a clean, modular way.
 app = create_app()
 
-# Initialize Flask-Admin and register models.
-# This automatically generates CRUD pages for each SQLAlchemy model.
-admin = Admin(app, name="Grade System Admin")
+# Initialize Flask-Admin with custom index view that's hidden
+# Setting url='/' keeps it as the root but is_visible=False hides the menu item
+admin = Admin(
+    app, 
+    name="Grade System Admin", 
+    index_view=MyAdminIndexView(name='Home', url='/admin')
+)
 
 # Register basic model views. These use default behavior.
 admin.add_view(ModelView(User, db.session))

@@ -81,9 +81,9 @@ with app.app_context():
                   time="MWF 10:00-10:50 AM", capacity=8)
     physics = Course(name="Physics 121", teacher_id=teachers[1].id,
                      time="TR 11:00-11:50 AM", capacity=10)
-    cs106 = Course(name="CS 106", teacher_id=teachers[2].id,
+    cs106 = Course(name="CSE 106", teacher_id=teachers[2].id,
                    time="MWF 2:00-2:50 PM", capacity=10)
-    cs162 = Course(name="CS 162", teacher_id=teachers[2].id,
+    cs162 = Course(name="CSE 162", teacher_id=teachers[2].id,
                    time="TR 3:00-3:50 PM", capacity=4)
     bio001 = Course(name="BIO 001", teacher_id=teachers[2].id,
                     time="TF 3:00-3:50 PM", capacity=20)
