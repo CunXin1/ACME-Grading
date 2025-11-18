@@ -16,7 +16,6 @@ env/
 ENV/
 
 # Database
-*.db
 *.sqlite3
 instance/
 database/app.db
@@ -49,3 +48,4 @@ desktop.ini
 __pycache__/
 .pytest_cache/
 .cache/
+/.vs/ACME-Grading.slnx/FileContentIndex
