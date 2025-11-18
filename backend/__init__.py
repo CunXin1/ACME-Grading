@@ -41,9 +41,10 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    print("✅ Flask app created successfully with routes:")
+    print("Flask app created successfully with routes:")
     for rule in app.url_map.iter_rules():
         if rule.endpoint != "static":
             print(f"   {rule.rule}")
 
     return app
+  
