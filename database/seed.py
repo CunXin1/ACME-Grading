@@ -55,7 +55,8 @@ with app.app_context():
         User(name="Nancy Little", role="student"),
         User(name="Mindy Norris", role="student"),
         User(name="Aditya Ranganath", role="student"),
-        User(name="Yi Wen Chen", role="student")
+        User(name="Yi Wen Chen", role="student"),
+        User(name="Ruibo", role="student"),
     ]
 
     # Add email and hashed password to each user.
@@ -84,6 +85,9 @@ with app.app_context():
                    time="MWF 2:00-2:50 PM", capacity=10)
     cs162 = Course(name="CS 162", teacher_id=teachers[2].id,
                    time="TR 3:00-3:50 PM", capacity=4)
+    bio001 = Course(name="BIO 001", teacher_id=teachers[2].id,
+                    time="TF 3:00-3:50 PM", capacity=20)
+
 
     db.session.add_all([math, physics, cs106, cs162])
     db.session.commit()
@@ -108,6 +112,9 @@ with app.app_context():
         ("Nancy Little", cs162, 87),
         ("Yi Wen Chen", cs162, 92),
         ("John Stuart", cs162, 67),
+        ("Ruibo", physics, 87),
+        ("Ruibo", cs106, 91),
+        ("Ruibo", bio001, 96),
     ]
 
     # Create a mapping from user names to their user objects.
