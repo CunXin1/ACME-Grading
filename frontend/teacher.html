@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ACME University - Teacher</title>
   <link rel="stylesheet" href="/src/css/base.css">
-<link rel="stylesheet" href="/src/css/teacher.css">
+  <link rel="stylesheet" href="/src/css/teacher.css">
 
+  <!-- 引入 Chart.js（必须） -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="teacher-container">
@@ -36,11 +38,14 @@
 
     <!-- 详情界面：学生成绩 -->
     <div id="studentsView" style="display:none;">
+
+      <!-- 顶部栏 -->
       <div class="top-bar">
         <button id="backBtn" class="back-btn">← Back</button>
         <h2 id="courseTitle"></h2>
       </div>
 
+      <!-- 学生成绩表格（保持原样） -->
       <table id="studentsTable">
         <thead>
           <tr>
@@ -50,6 +55,13 @@
         </thead>
         <tbody id="studentRows"></tbody>
       </table>
+
+      <!-- 成绩分布饼图（移动到表格下方） -->
+      <div style="width: 320px; margin: 30px auto 50px auto;">
+        <h3 style="text-align:center;">Grade Distribution</h3>
+        <canvas id="scoreChart"></canvas>
+      </div>
+
     </div>
   </div>
 
