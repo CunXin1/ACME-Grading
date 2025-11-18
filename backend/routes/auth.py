@@ -17,6 +17,31 @@ def load_user(user_id):
     """
     return User.query.get(int(user_id))
 
+# Add this route to backend/routes/auth.py
+
+@auth_bp.route("/reset-password", methods=["POST"])
+def reset_password():
+    """
+    Handles password reset requests.
+    Checks if the email exists in the database.
+    In a production system, this would send an actual recovery email.
+    For now, it just confirms whether the email is registered.
+    """
+    data = request.json
+    email = data.get("email")
+    
+    if not email:
+        return jsonify({"error": "Email is required"}), 400
+    
+    # Check if user exists
+    user = User.query.filter_by(email=email).first()
+    
+    if user:
+        # In production: send actual recovery email here
+        # For now, just confirm the email exists
+        return jsonify({"message": "Recovery email sent"}), 200
+    else:
+        return jsonify({"error": "Email not recognized"}), 404
 
 # -------------------- User Registration --------------------
 @auth_bp.route("/register", methods=["POST"])
