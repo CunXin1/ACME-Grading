@@ -1,13 +1,15 @@
 // frontend/src/js/main.js
 
+// -------------------- Login Form Submission --------------------
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+  e.preventDefault(); // Prevent page reload on form submit.
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
   const errorMsg = document.getElementById("error");
 
   try {
+    // Send login request to backend /api/auth/login
     const res = await fetch("http://127.0.0.1:5000/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -16,15 +18,16 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     const data = await res.json();
 
+    // Display error message if login failed.
     if (!res.ok) {
       errorMsg.textContent = data.error || "Login failed";
       return;
     }
 
-    // 保存登录用户信息
+    // Store logged-in user info in localStorage for later use.
     localStorage.setItem("user", JSON.stringify(data.user));
 
-    // 按角色跳转
+    // Redirect based on the user's role.
     if (data.user.role === "student") {
       window.location.href = "./student.html";
     } else if (data.user.role === "teacher") {
@@ -32,17 +35,23 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     } else {
       alert("Unknown role.");
     }
+
   } catch (err) {
+    // Handles network or backend-down scenarios.
     errorMsg.textContent = "Network error, check backend server.";
   }
 });
 
-// 注册功能逻辑
+
+// -------------------- Registration Box Toggle --------------------
 document.getElementById("showRegister").addEventListener("click", (e) => {
   e.preventDefault();
+  // Display the hidden registration form.
   document.getElementById("registerBox").style.display = "block";
 });
 
+
+// -------------------- Registration Request --------------------
 document.getElementById("registerBtn").addEventListener("click", async (e) => {
   e.preventDefault();
 
@@ -53,6 +62,7 @@ document.getElementById("registerBtn").addEventListener("click", async (e) => {
   const regMsg = document.getElementById("regMsg");
 
   try {
+    // Send registration data to backend /api/auth/register
     const res = await fetch("http://127.0.0.1:5000/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -61,19 +71,23 @@ document.getElementById("registerBtn").addEventListener("click", async (e) => {
 
     const data = await res.json();
 
+    // Display error message if registration fails.
     if (!res.ok) {
       regMsg.textContent = data.error || "Registration failed";
       return;
     }
 
+    // Show success confirmation in green text.
     regMsg.style.color = "green";
     regMsg.textContent = "Registration successful! You can now log in.";
 
-    // 自动返回登录表单
+    // Automatically close the registration form after a delay.
     setTimeout(() => {
       document.getElementById("registerBox").style.display = "none";
     }, 1500);
+
   } catch (err) {
+    // Handle connection failure.
     regMsg.textContent = "Network error, please try again.";
   }
 });

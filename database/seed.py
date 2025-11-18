@@ -1,5 +1,7 @@
 # database/seed.py
 import os, sys
+
+# Add project root to import path so backend modules can be imported correctly.
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from backend import create_app, db
@@ -8,30 +10,43 @@ from backend.models.course import Course
 from backend.models.enrollment import Enrollment
 from werkzeug.security import generate_password_hash
 
+# Create the Flask application context required for database operations.
 app = create_app()
 
 with app.app_context():
-    print("🧹 Dropping all tables...")
-    db.drop_all()
-    print("🧱 Creating all tables...")
-    db.create_all()
+    print("Dropping all tables...")
+    db.drop_all()  # Remove all existing tables to reset the database.
 
+    print("Creating all tables...")
+    db.create_all()  # Rebuild fresh tables based on current models.
+
+
+    # -------- Helper Functions --------
     def make_email(name):
-        # 生成简单邮箱：空格→点，小写
+        """
+        Generates a simple email address for a user.
+        Removes spaces, converts to lowercase, and appends '@school.edu'.
+        """
         return name.replace(" ", "").lower() + "@school.edu"
 
     def make_password(name):
-        # 默认密码为 name（全小写）+ "123"
-        return generate_password_hash(name.replace(" ", "").lower(), method="pbkdf2:sha256")
+        """
+        Generates a default hashed password.
+        Uses the lowercase version of the name as the password source.
+        Hashing is done using PBKDF2-SHA256.
+        """
+        return generate_password_hash(name.replace(" ", "").lower(),
+                                      method="pbkdf2:sha256")
 
-    # ---- 教师 ----
+
+    # -------- Teacher User Records --------
     teachers = [
         User(name="Ralph Jenkins", role="teacher"),
         User(name="Susan Walker", role="teacher"),
         User(name="Ammon Hepworth", role="teacher")
     ]
 
-    # ---- 学生 ----
+    # -------- Student User Records --------
     students = [
         User(name="Jose Santos", role="student"),
         User(name="Betty Brown", role="student"),
@@ -43,7 +58,7 @@ with app.app_context():
         User(name="Yi Wen Chen", role="student")
     ]
 
-    # ---- 统一补全邮箱和密码 ----
+    # Add email and hashed password to each user.
     for u in teachers + students:
         u.email = make_email(u.name)
         u.password = make_password(u.name)
@@ -51,16 +66,22 @@ with app.app_context():
     db.session.add_all(teachers + students)
     db.session.commit()
 
-    # ---- 课程 ----
-    math = Course(name="Math 101", teacher_id=teachers[0].id, time="MWF 10:00-10:50 AM", capacity=8)
-    physics = Course(name="Physics 121", teacher_id=teachers[1].id, time="TR 11:00-11:50 AM", capacity=10)
-    cs106 = Course(name="CS 106", teacher_id=teachers[2].id, time="MWF 2:00-2:50 PM", capacity=10)
-    cs162 = Course(name="CS 162", teacher_id=teachers[2].id, time="TR 3:00-3:50 PM", capacity=4)
+
+    # -------- Course Records --------
+    math = Course(name="Math 101", teacher_id=teachers[0].id,
+                  time="MWF 10:00-10:50 AM", capacity=8)
+    physics = Course(name="Physics 121", teacher_id=teachers[1].id,
+                     time="TR 11:00-11:50 AM", capacity=10)
+    cs106 = Course(name="CS 106", teacher_id=teachers[2].id,
+                   time="MWF 2:00-2:50 PM", capacity=10)
+    cs162 = Course(name="CS 162", teacher_id=teachers[2].id,
+                   time="TR 3:00-3:50 PM", capacity=4)
 
     db.session.add_all([math, physics, cs106, cs162])
     db.session.commit()
 
-    # ---- 选课及成绩 ----
+
+    # -------- Enrollment + Grades --------
     enrollments = [
         ("Jose Santos", math, 92),
         ("Betty Brown", math, 65),
@@ -81,11 +102,16 @@ with app.app_context():
         ("John Stuart", cs162, 67),
     ]
 
+    # Create a mapping from user names to their user objects.
     name_to_user = {u.name: u for u in teachers + students}
+
+    # Insert enrollment rows into the table.
     for student_name, course, grade in enrollments:
         db.session.add(
-            Enrollment(student_id=name_to_user[student_name].id, course_id=course.id, grade=grade)
+            Enrollment(student_id=name_to_user[student_name].id,
+                       course_id=course.id,
+                       grade=grade)
         )
 
     db.session.commit()
-    print("🎉 Database seeded successfully with default emails & passwords!")
+    print("Database seeded successfully with default emails & passwords!")
