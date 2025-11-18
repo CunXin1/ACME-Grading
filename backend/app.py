@@ -11,7 +11,7 @@ from flask_admin.contrib.sqla import ModelView
 # Import the application factory and database instance
 # from the backend package. These are defined in backend/__init__.py.
 # 兼容从不同目录运行
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 # # Relative Path Import
 # from . import create_app, db 
 # # 
@@ -94,7 +94,9 @@ admin = Admin(
 
 # Register basic model views. These use default behavior.
 # Flask-Admin
-admin = Admin(app, name="Grade System Admin")
+# admin = Admin(app, name="Grade System Admin")
+# comment out the line above (accidentally re-initialized)
+
 admin.add_view(ModelView(User, db.session))
 admin.add_view(CourseAdmin(Course, db.session))
 # Register the custom Enrollment admin view defined above.
