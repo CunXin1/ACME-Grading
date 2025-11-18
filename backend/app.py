@@ -1,11 +1,14 @@
 # backend/app.py
+
 import os, sys
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
 # 兼容从不同目录运行
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
+# # Relative Path Import
+# from . import create_app, db 
+# # 
 from backend import create_app, db
 from backend.models.user import User
 from backend.models.course import Course
@@ -31,7 +34,7 @@ class EnrollmentAdmin(ModelView):
 app = create_app()
 
 # Flask-Admin
-admin = Admin(app, name="Grade System Admin", template_mode="bootstrap3")
+admin = Admin(app, name="Grade System Admin")
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Course, db.session))
 admin.add_view(EnrollmentAdmin(Enrollment, db.session))
